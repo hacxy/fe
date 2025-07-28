@@ -31,7 +31,8 @@
     "lint:staged": "eslint --fix",
     "cz": "czg",
     "copy-templates": "node scripts/copy-template.mjs",
-    "release": "bump"
+    "release": "bump",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
     "@hacxy/bump": "^0.1.0",
