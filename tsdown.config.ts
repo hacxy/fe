@@ -5,4 +5,5 @@ export default defineConfig({
   shims: true,
   format: ['esm'],
   target: 'node18',
+  clean: false
 });
