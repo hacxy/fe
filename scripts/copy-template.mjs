@@ -153,7 +153,9 @@ async function copyDirRecursive(src, dest) {
 // 复制根目录下的.vscode和.gitignore到目标模板目录，并重命名
 async function copyExtraToTemplate(rootDir, templateDir) {
   const vscodeSrc = join(rootDir, '.vscode');
+  const githubSrc = join(rootDir, '.github');
   const vscodeDest = join(templateDir, '_vscode');
+  const githubDest = join(templateDir, '_github');
   const gitignoreSrc = join(rootDir, '.gitignore');
   const gitignoreDest = join(templateDir, '_gitignore');
 
@@ -166,6 +168,12 @@ async function copyExtraToTemplate(rootDir, templateDir) {
   if (existsSync(gitignoreSrc)) {
     await copyFile(gitignoreSrc, gitignoreDest);
     console.log('📄 复制 .gitignore 到模板并重命名为 _gitignore');
+  }
+
+  // 复制.github文件夹
+  if (existsSync(githubSrc)) {
+    await copyDirRecursive(githubSrc, githubDest);
+    console.log('📁 复制 .github 到模板并重命名为 _github');
   }
 }
 

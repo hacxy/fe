@@ -29,5 +29,5 @@ jobs:
         run: pnpm build
 
       - name: Linter
-        run: pnpm lint:all
+        run: pnpm lint
 

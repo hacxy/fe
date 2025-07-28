@@ -10,49 +10,25 @@ import { copyTemplate, emptyDir, getTemplates } from './utils.js';
 async function renameTemplateSpecialFiles(dest: string) {
   const gitignorePath = join(dest, '_gitignore');
   const vscodePath = join(dest, '_vscode');
+  const githubPath = join(dest, '_github');
   if (existsSync(gitignorePath)) {
     await rename(gitignorePath, join(dest, '.gitignore'));
   }
   if (existsSync(vscodePath)) {
     await rename(vscodePath, join(dest, '.vscode'));
   }
+  if (existsSync(githubPath)) {
+    await rename(githubPath, join(dest, '.github'));
+  }
 }
 
-async function main() {
-  const templatesDir = resolve(__dirname, '../dist/templates');
-  const templates = await getTemplates(templatesDir);
-
-  if (templates.length === 0) {
-    console.log(chalk.red('❌ 未找到任何模板，请先运行模板构建脚本。'));
-    process.exit(1);
-  }
-
-  const { template } = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'template',
-      message: '请选择要使用的模板：',
-      choices: templates,
-    },
-  ]);
-
-  const { projectName } = await inquirer.prompt([
-    {
-      type: 'input',
-      name: 'projectName',
-      message: '请输入项目名称：',
-      validate: (input: string) => {
-        if (!input) return '项目名称不能为空';
-        return true;
-      },
-    },
-  ]);
-
+async function createProject(template: string, projectName: string, templatesDir: string) {
   let projectPath = resolve(process.cwd(), projectName);
   if (projectName === '.' || projectName === './') {
     projectPath = process.cwd();
   }
 
+  // 检查目录是否已存在且非空
   if (existsSync(projectPath)) {
     const files = await readdir(projectPath);
     if (files.length > 0) {
@@ -114,6 +90,39 @@ async function main() {
     spinner.fail(chalk.red(`项目创建失败: ${err.message}`));
     process.exit(1);
   }
+}
+
+async function main() {
+  const templatesDir = resolve(__dirname, '../dist/templates');
+  const templates = await getTemplates(templatesDir);
+
+  if (templates.length === 0) {
+    console.log(chalk.red('❌ 未找到任何模板，请先运行模板构建脚本。'));
+    process.exit(1);
+  }
+
+  const { template } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'template',
+      message: '请选择要使用的模板：',
+      choices: templates,
+    },
+  ]);
+
+  const { projectName } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'projectName',
+      message: '请输入项目名称：',
+      validate: (input: string) => {
+        if (!input) return '项目名称不能为空';
+        return true;
+      },
+    },
+  ]);
+
+  await createProject(template, projectName, templatesDir);
 }
 
 main();
