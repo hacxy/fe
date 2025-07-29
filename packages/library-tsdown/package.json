@@ -1,0 +1,21 @@
+{
+  "name": "library-tsdown",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "license": "MIT",
+  "keywords": [],
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsdown --sourcemap --dts --watch ",
+    "build": "tsdown --dts --clean --minify"
+  },
+  "devDependencies": {
+    "@hacxy/eslint-config": "^0.4.1",
+    "@hacxy/tsconfig": "^0.1.0",
+    "eslint": "^9.32.0",
+    "tsdown": "^0.13.0",
+    "typescript": "^5.8.3"
+  }
+}

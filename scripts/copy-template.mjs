@@ -150,20 +150,23 @@ async function copyDirRecursive(src, dest) {
   }
 }
 
-// 复制根目录下的.vscode和.gitignore到目标模板目录，并重命名
+// 复制根目录下的.vscode、.gitignore、scripts目录和commit-msg.mjs到目标模板目录，并重命名
 async function copyExtraToTemplate(rootDir, templateDir) {
   const vscodeSrc = join(rootDir, '.vscode');
   const githubSrc = join(rootDir, '.github');
+  const scriptsSrc = join(rootDir, 'scripts');
   const vscodeDest = join(templateDir, '_vscode');
   const githubDest = join(templateDir, '_github');
   const gitignoreSrc = join(rootDir, '.gitignore');
   const gitignoreDest = join(templateDir, '_gitignore');
+  const scriptsDest = join(templateDir, 'scripts');
 
   // 复制.vscode文件夹
   if (existsSync(vscodeSrc)) {
     await copyDirRecursive(vscodeSrc, vscodeDest);
     console.log('📁 复制 .vscode 到模板并重命名为 _vscode');
   }
+
   // 复制.gitignore文件
   if (existsSync(gitignoreSrc)) {
     await copyFile(gitignoreSrc, gitignoreDest);
@@ -174,6 +177,19 @@ async function copyExtraToTemplate(rootDir, templateDir) {
   if (existsSync(githubSrc)) {
     await copyDirRecursive(githubSrc, githubDest);
     console.log('📁 复制 .github 到模板并重命名为 _github');
+  }
+
+  // 复制scripts文件夹
+  if (existsSync(scriptsSrc)) {
+    await copyDirRecursive(scriptsSrc, scriptsDest);
+    console.log('📁 复制 scripts 到模板并重命名为 _scripts');
+  }
+
+  // 删除scripts中的copy-template.mjs
+  const copyTemplatePath = join(scriptsDest, 'copy-template.mjs');
+  if (existsSync(copyTemplatePath)) {
+    await rm(copyTemplatePath);
+    console.log('📄 删除 scripts 中的 copy-template.mjs');
   }
 }
 
