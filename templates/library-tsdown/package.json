@@ -3,9 +3,16 @@
   "type": "module",
   "version": "0.0.0",
   "description": "",
-  "author": "",
+  "author": {
+    "name": "Hacxy",
+    "email": "hacxy.js@outlook.com",
+    "url": "https://github.com/hacxy"
+  },
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "library",
+    "template"
+  ],
   "main": "index.js",
   "scripts": {
     "dev": "tsdown --sourcemap --dts --watch ",
@@ -17,7 +24,6 @@
     "prepare": "simple-git-hooks",
     "release": "bump"
   },
-
   "devDependencies": {
     "@hacxy/bump": "^0.1.0",
     "@hacxy/eslint-config": "^0.4.1",

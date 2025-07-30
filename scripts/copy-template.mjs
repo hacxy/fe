@@ -73,11 +73,11 @@ async function main() {
 
   try {
     const cwd = process.cwd();
-    const packagesDir = join(cwd, 'packages');
+    const originTemplatesDir = join(cwd, 'templates');
     const templatesDir = join(cwd, 'dist', 'templates');
 
     // 检查packages目录是否存在
-    if (!existsSync(packagesDir)) {
+    if (!existsSync(originTemplatesDir)) {
       console.error('❌ packages目录不存在');
       process.exit(1);
     }
@@ -92,11 +92,11 @@ async function main() {
     await mkdir(templatesDir, { recursive: true });
 
     // 读取packages目录下的所有子目录
-    const items = await readdir(packagesDir);
+    const items = await readdir(originTemplatesDir);
     const templates = [];
 
     for (const item of items) {
-      const itemPath = join(packagesDir, item);
+      const itemPath = join(originTemplatesDir, item);
       const stats = await stat(itemPath);
 
       if (stats.isDirectory()) {
@@ -113,7 +113,7 @@ async function main() {
 
     // 复制每个模板
     for (const template of templates) {
-      const sourcePath = join(packagesDir, template);
+      const sourcePath = join(originTemplatesDir, template);
       const targetPath = join(templatesDir, template);
 
       console.log(`🔄 正在复制模板: ${template}`);
