@@ -85,7 +85,7 @@ async function creator(template: string, projectName: string, templatesDir: stri
     packageJson.scripts.prepare = "simple-git-hooks";
     packageJson['simple-git-hooks'] = {
       "pre-commit": "npx lint-staged",
-      "commit-msg": "fe commit-msg"
+      "commit-msg": "fe msg"
     } 
     packageJson['lint-staged'] = {
       "*": [
