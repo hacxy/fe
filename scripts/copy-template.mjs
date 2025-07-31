@@ -43,7 +43,6 @@ async function copyDirectory(source, target) {
 
       // 检查是否应该排除
       if (shouldExclude(item)) {
-        console.log(`⏭️  跳过: ${item}`);
         continue;
       }
 
@@ -56,12 +55,36 @@ async function copyDirectory(source, target) {
       else {
         // 复制文件
         await copyFile(sourcePath, targetPath);
-        console.log(`📄 复制文件: ${item}`);
       }
     }
   }
   catch (error) {
     console.error(`❌ 复制目录失败 ${source}:`, error.message);
+  }
+}
+
+/**
+ * 复制模板到指定目录
+ * @param {string} originTemplatesDir - 源模板目录
+ * @param {string} targetTemplatesDir - 目标模板目录
+ * @param {string[]} templates - 模板列表
+ */
+async function copyTemplatesToDirectory(originTemplatesDir, targetTemplatesDir, templates) {
+  // 清空并重新创建templates目录
+  if (existsSync(targetTemplatesDir)) {
+    await rm(targetTemplatesDir, { recursive: true, force: true });
+  }
+
+  // 确保templates目录存在
+  await mkdir(targetTemplatesDir, { recursive: true });
+
+  // 复制每个模板
+  for (const template of templates) {
+    const sourcePath = join(originTemplatesDir, template);
+    const targetPath = join(targetTemplatesDir, template);
+
+    await copyDirectory(sourcePath, targetPath);
+    await copyExtraToTemplate(process.cwd(), targetPath);
   }
 }
 
@@ -74,22 +97,18 @@ async function main() {
   try {
     const cwd = process.cwd();
     const originTemplatesDir = join(cwd, 'templates');
-    const templatesDir = join(cwd, 'dist', 'templates');
+    
+    // 定义多个目标目录
+    const targetDirectories = [
+      join(cwd, './packages/create-fe/dist', 'templates'),
+      join(cwd, './packages/fe/dist', 'templates')
+    ];
 
     // 检查packages目录是否存在
     if (!existsSync(originTemplatesDir)) {
-      console.error('❌ packages目录不存在');
+      console.error('❌ templates目录不存在');
       process.exit(1);
     }
-
-    // 清空并重新创建templates目录
-    if (existsSync(templatesDir)) {
-      console.log('🧹 清空现有模板目录...');
-      await rm(templatesDir, { recursive: true, force: true });
-    }
-
-    // 确保templates目录存在
-    await mkdir(templatesDir, { recursive: true });
 
     // 读取packages目录下的所有子目录
     const items = await readdir(originTemplatesDir);
@@ -109,24 +128,16 @@ async function main() {
       process.exit(0);
     }
 
-    console.log(`📦 找到 ${templates.length} 个模板:\n`);
+    console.log(`📦 找到 ${templates.length} 个模板`);
 
-    // 复制每个模板
-    for (const template of templates) {
-      const sourcePath = join(originTemplatesDir, template);
-      const targetPath = join(templatesDir, template);
-
-      console.log(`🔄 正在复制模板: ${template}`);
-      await copyDirectory(sourcePath, targetPath);
-
-      // 复制根目录下的.vscode和.gitignore
-      await copyExtraToTemplate(process.cwd(), targetPath);
-
-      console.log(`✅ 模板 ${template} 复制完成\n`);
+    // 复制到每个目标目录
+    for (const targetDir of targetDirectories) {
+      await copyTemplatesToDirectory(originTemplatesDir, targetDir, templates);
     }
 
-    console.log('🎉 所有模板复制完成!');
-    console.log(`📁 输出目录: ${templatesDir}`);
+    console.log('✅ 所有模板复制完成!');
+    console.log('📁 输出目录:');
+    targetDirectories.forEach(dir => console.log(`   - ${dir}`));
   }
   catch (error) {
     console.error('❌ 脚本执行失败:', error.message);
@@ -164,32 +175,27 @@ async function copyExtraToTemplate(rootDir, templateDir) {
   // 复制.vscode文件夹
   if (existsSync(vscodeSrc)) {
     await copyDirRecursive(vscodeSrc, vscodeDest);
-    console.log('📁 复制 .vscode 到模板并重命名为 _vscode');
   }
 
   // 复制.gitignore文件
   if (existsSync(gitignoreSrc)) {
     await copyFile(gitignoreSrc, gitignoreDest);
-    console.log('📄 复制 .gitignore 到模板并重命名为 _gitignore');
   }
 
   // 复制.github文件夹
   if (existsSync(githubSrc)) {
     await copyDirRecursive(githubSrc, githubDest);
-    console.log('📁 复制 .github 到模板并重命名为 _github');
   }
 
   // 复制scripts文件夹
   if (existsSync(scriptsSrc)) {
     await copyDirRecursive(scriptsSrc, scriptsDest);
-    console.log('📁 复制 scripts 到模板并重命名为 _scripts');
   }
 
   // 删除scripts中的copy-template.mjs
   const copyTemplatePath = join(scriptsDest, 'copy-template.mjs');
   if (existsSync(copyTemplatePath)) {
     await rm(copyTemplatePath);
-    console.log('📄 删除 scripts 中的 copy-template.mjs');
   }
 }
 

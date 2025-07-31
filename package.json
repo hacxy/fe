@@ -1,10 +1,7 @@
 {
-  "name": "@hacxy/create-fe",
+  "name": "fe",
   "type": "module",
   "version": "0.2.0",
-  "publishConfig": {
-    "access": "public"
-  },
   "packageManager": "pnpm@10.12.3",
   "description": "",
   "author": {
@@ -14,40 +11,27 @@
   },
   "license": "MIT",
   "keywords": [],
-  "bin": {
-    "create-fe": "./dist/index.js"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
-    "stub": "npm run copy-templates && tsdown",
-    "build": "npm run copy-templates && tsdown --minify",
-    "watch": "tsdown --watch",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "lint:all": "pnpm -r run lint",
-    "lint:all:fix": "pnpm -r run lint:fix",
-    "lint:staged": "eslint --fix",
+    "build": "npm run copy-templates && pnpm -r run build",
+    "build:fe": "pnpm -F @hacxy/fe build && npm run copy-templates",
+    "build:create": "pnpm -F @hacxy/create-fe build && npm run copy-templates",
+    "lint": "pnpm -r run lint",
+    "lint:fix": "pnpm -r run lint:fix",
+    "lint:staged": "pnpm -r run lint:staged",
     "cz": "czg",
     "copy-templates": "node scripts/copy-template.mjs",
-    "release": "bump",
+    "release:fe": "pnpm -F @hacxy/fe bump",
+    "release:create": "pnpm -F @hacxy/create-fe bump",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "@hacxy/bump": "^0.1.0",
-    "@hacxy/eslint-config": "^0.4.1",
-    "@hacxy/tsconfig": "^0.1.0",
-    "@types/inquirer": "^9.0.8",
     "@types/node": "^22.16.5",
     "chalk": "^5.4.1",
     "czg": "^1.12.0",
-    "eslint": "^9.32.0",
-    "inquirer": "^9.3.7",
+    "inquirer": "^12.9.0",
     "lint-staged": "^16.1.2",
     "ora": "^8.2.0",
     "simple-git-hooks": "^2.13.0",
-    "tsdown": "^0.13.0",
     "typescript": "^5.8.3"
   },
   "simple-git-hooks": {

@@ -78,6 +78,18 @@ async function createProject(template: string, projectName: string, templatesDir
     const packageJsonPath = join(dest, 'package.json');
     const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf-8'));
     packageJson.name = visibleProjectName;
+    packageJson.devDependencies['simple-git-hooks'] = "^2.13.0";
+    packageJson.devDependencies['lint-staged'] = "^16.1.2";
+    packageJson.scripts.prepare = "simple-git-hooks";
+    packageJson['simple-git-hooks'] = {
+      "pre-commit": "npx lint-staged",
+      "commit-msg": "node scripts/commit-msg.mjs"
+    } 
+    packageJson['lint-staged'] = {
+      "*": [
+        "npm run lint:staged"
+      ]
+    }
     await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
     await renameTemplateSpecialFiles(dest);
@@ -92,7 +104,7 @@ async function createProject(template: string, projectName: string, templatesDir
   }
 }
 
-async function main() {
+export async function createApp() {
   const templatesDir = resolve(__dirname, '../dist/templates');
   const templates = await getTemplates(templatesDir);
 
@@ -124,6 +136,4 @@ async function main() {
 
   await createProject(template, projectName, templatesDir);
 }
-
-main();
 

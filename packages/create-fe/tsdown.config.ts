@@ -1,9 +1,11 @@
 import { defineConfig } from 'tsdown';
 
 export default defineConfig({
-  entry: ['./bin'],
+  entry: ['./src/index.ts'],
   shims: true,
   format: ['esm'],
+  clean: false,
+  declaration: false,
   target: 'node18',
-  clean: false
+  sourcemap: false,
 });
