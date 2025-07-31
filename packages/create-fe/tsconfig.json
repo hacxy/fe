@@ -1,3 +1,4 @@
 {
-  "extends": "@hacxy/tsconfig"
+  "extends": "@hacxy/tsconfig",
+  "include": ["src/**/*"]
 }

@@ -1,3 +1,5 @@
-export function foo(name: string) {
-  return `Hello ${name}`;
+function bootstrap() {
+  console.log('bootstrap');
 }
+
+bootstrap();

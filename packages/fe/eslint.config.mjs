@@ -1,3 +1,7 @@
-import hacxy from '@hacxy/eslint-config';
+import hacxy from '@hacxy/eslint-config/nodejs';
 
-export default hacxy({});
+export default hacxy({
+  rules: {
+    'antfu/no-import-dist': 0
+  }
+});

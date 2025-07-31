@@ -1,7 +1,7 @@
 {
   "name": "@hacxy/fe",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "",
   "author": {
     "name": "Hacxy",
@@ -23,10 +23,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "eslint --fix",
-    "release": "bump"
+    "release": "bump -t -b -c"
   },
   "devDependencies": {
-    "@hacxy/bump": "^0.1.0",
     "@hacxy/eslint-config": "^0.4.1",
     "@hacxy/tsconfig": "^0.1.0",
     "eslint": "^9.32.0",
