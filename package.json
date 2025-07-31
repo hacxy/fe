@@ -23,7 +23,7 @@
     "lint:staged": "pnpm -r run lint:staged",
     "cz": "czg",
     "copy-templates": "node scripts/copy-template.mjs",
-    "release": "npm run copy-templates && pnpm -F @hacxy/fe bump && pnpm -F @hacxy/create-fe bump",
+    "release": "npm run copy-templates && pnpm -F @hacxy/fe release && pnpm -F @hacxy/create-fe release",
     "prepare": "simple-git-hooks"
   },
   "devDependencies": {

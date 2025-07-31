@@ -8,15 +8,18 @@
     "email": "hacxy.js@outlook.com",
     "url": "https://hacxy.cn"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "license": "MIT",
   "keywords": [
     "CLI"
   ],
   "bin": {
     "create-fe": "index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "dev": "tsdown --watch",
