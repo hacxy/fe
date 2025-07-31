@@ -23,7 +23,7 @@ async function renameTemplateSpecialFiles(dest: string) {
   }
 }
 
-async function createProject(template: string, projectName: string, templatesDir: string) {
+async function creator(template: string, projectName: string, templatesDir: string) {
   let projectPath = resolve(process.cwd(), projectName);
   if (projectName === '.' || projectName === './') {
     projectPath = process.cwd();
@@ -106,7 +106,7 @@ async function createProject(template: string, projectName: string, templatesDir
   }
 }
 
-export async function createApp() {
+export async function createApp(template?: string) {
   const templatesDir = resolve(__dirname, '../dist/templates');
   const templates = await getTemplates(templatesDir);
 
@@ -115,14 +115,17 @@ export async function createApp() {
     process.exit(1);
   }
 
-  const { template } = await inquirer.prompt([
+  if (!template) {
+    const { template: selectedTemplate } = await inquirer.prompt([
     {
       type: 'list',
       name: 'template',
       message: '请选择要使用的模板：',
       choices: templates,
-    },
-  ]);
+      },
+    ]);
+    template = selectedTemplate;
+  }
 
   const { projectName } = await inquirer.prompt([
     {
@@ -136,5 +139,10 @@ export async function createApp() {
     },
   ]);
 
-  await createProject(template, projectName, templatesDir);
+  if (!template) {
+    console.log(chalk.red('❌ 未选择模板，请先选择模板。'));
+    process.exit(1);
+  }
+
+  await creator(template, projectName, templatesDir);
 }
