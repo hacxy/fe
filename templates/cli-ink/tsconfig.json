@@ -1,0 +1,9 @@
+{
+  "extends": "@hacxy/tsconfig",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ]
+}
