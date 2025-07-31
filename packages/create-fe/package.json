@@ -27,6 +27,7 @@
     "release": "bump -b --message='chore: release create-fe v{version}'"
   },
   "devDependencies": {
+    "@hacxy/bump": "^0.2.0",
     "@hacxy/eslint-config": "^0.4.1",
     "@hacxy/tsconfig": "^0.1.0",
     "eslint": "^9.32.0",
