@@ -6,6 +6,7 @@ import chalk from 'chalk';
 import inquirer from 'inquirer';
 import ora from 'ora';
 import { copyTemplate, emptyDir, getTemplates } from './utils.js';
+import pkg from '../packages/fe/package.json';
 
 async function renameTemplateSpecialFiles(dest: string) {
   const gitignorePath = join(dest, '_gitignore');
@@ -74,16 +75,17 @@ async function createProject(template: string, projectName: string, templatesDir
     const dest = resolve(process.cwd(), projectName);
     await copyTemplate(src, dest);
 
-    // 修改package.json中的name
+    // 修改package.json
     const packageJsonPath = join(dest, 'package.json');
     const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf-8'));
     packageJson.name = visibleProjectName;
     packageJson.devDependencies['simple-git-hooks'] = "^2.13.0";
     packageJson.devDependencies['lint-staged'] = "^16.1.2";
+    packageJson.devDependencies[pkg.name] = `^${pkg.version}`;
     packageJson.scripts.prepare = "simple-git-hooks";
     packageJson['simple-git-hooks'] = {
       "pre-commit": "npx lint-staged",
-      "commit-msg": "node scripts/commit-msg.mjs"
+      "commit-msg": "fe commit-msg"
     } 
     packageJson['lint-staged'] = {
       "*": [

@@ -165,12 +165,10 @@ async function copyDirRecursive(src, dest) {
 async function copyExtraToTemplate(rootDir, templateDir) {
   const vscodeSrc = join(rootDir, '.vscode');
   const githubSrc = join(rootDir, '.github');
-  const scriptsSrc = join(rootDir, 'scripts');
   const vscodeDest = join(templateDir, '_vscode');
   const githubDest = join(templateDir, '_github');
   const gitignoreSrc = join(rootDir, '.gitignore');
   const gitignoreDest = join(templateDir, '_gitignore');
-  const scriptsDest = join(templateDir, 'scripts');
 
   // 复制.vscode文件夹
   if (existsSync(vscodeSrc)) {
@@ -185,17 +183,6 @@ async function copyExtraToTemplate(rootDir, templateDir) {
   // 复制.github文件夹
   if (existsSync(githubSrc)) {
     await copyDirRecursive(githubSrc, githubDest);
-  }
-
-  // 复制scripts文件夹
-  if (existsSync(scriptsSrc)) {
-    await copyDirRecursive(scriptsSrc, scriptsDest);
-  }
-
-  // 删除scripts中的copy-template.mjs
-  const copyTemplatePath = join(scriptsDest, 'copy-template.mjs');
-  if (existsSync(copyTemplatePath)) {
-    await rm(copyTemplatePath);
   }
 }
 
