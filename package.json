@@ -10,7 +10,11 @@
     "url": "https://hacxy.cn"
   },
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "cli",
+    "fe",
+    "create-fe"
+  ],
   "scripts": {
     "build": "pnpm -r run build",
     "build:cli": "npm run copy-templates && pnpm -F @hacxy/fe build && pnpm -F @hacxy/create-fe build",

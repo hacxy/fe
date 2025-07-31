@@ -17,6 +17,9 @@
     "template"
   ],
   "main": "index.js",
+  "bin": {
+    "fe": "index.js"
+  },
   "scripts": {
     "dev": "tsdown --watch ",
     "build": "tsdown  --minify",
@@ -28,6 +31,7 @@
   "devDependencies": {
     "@hacxy/eslint-config": "^0.4.1",
     "@hacxy/tsconfig": "^0.1.0",
+    "cac": "^6.7.14",
     "eslint": "^9.32.0",
     "lint-staged": "^16.1.2",
     "tsdown": "^0.13.0",

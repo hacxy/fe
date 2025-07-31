@@ -136,4 +136,3 @@ export async function createApp() {
 
   await createProject(template, projectName, templatesDir);
 }
-
