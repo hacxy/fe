@@ -1,6 +1,5 @@
 # @hacxy/fe
 
-
 ## 简介
 
 `@hacxy/fe` 是一个现代化的前端项目模板集合与脚手架工具，旨在帮助你快速初始化、开发和管理前端项目。通过命令行工具选择模板并生成项目，内置最佳实践配置，开箱即用。
@@ -31,3 +30,13 @@ pnpm create @hacxy/fe
 # yarn
 yarn create @hacxy/fe
 ```
+
+通过全局安装 `@hacxy/fe` 创建项目
+
+```sh
+npm install @hacxy/fe -g
+
+# 创建项目
+fe new
+```
+
