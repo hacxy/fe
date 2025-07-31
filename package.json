@@ -12,9 +12,8 @@
   "license": "MIT",
   "keywords": [],
   "scripts": {
-    "build": "npm run copy-templates && pnpm -r run build",
-    "build:fe": "pnpm -F @hacxy/fe build && npm run copy-templates",
-    "build:create": "pnpm -F @hacxy/create-fe build && npm run copy-templates",
+    "build": "pnpm -r run build",
+    "build:cli": "npm run copy-templates && pnpm -F @hacxy/fe build && pnpm -F @hacxy/create-fe build",
     "lint": "pnpm -r run lint",
     "lint:fix": "pnpm -r run lint:fix",
     "lint:staged": "pnpm -r run lint:staged",

@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "tsdown --watch",
-    "build": "tsdown --clean --minify",
+    "build": "tsdown --minify",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "eslint --fix",

@@ -18,19 +18,17 @@
   ],
   "main": "index.js",
   "scripts": {
-    "dev": "tsdown --sourcemap --dts --watch ",
-    "build": "tsdown --dts --clean --minify",
+    "dev": "tsdown --watch ",
+    "build": "tsdown  --minify",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:staged": "eslint --fix",
-    "cz": "czg",
     "release": "bump"
   },
   "devDependencies": {
     "@hacxy/bump": "^0.1.0",
     "@hacxy/eslint-config": "^0.4.1",
     "@hacxy/tsconfig": "^0.1.0",
-    "czg": "^1.12.0",
     "eslint": "^9.32.0",
     "lint-staged": "^16.1.2",
     "tsdown": "^0.13.0",
