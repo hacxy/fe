@@ -1,3 +1,17 @@
+# [0.5.0](https://github.com/hacxy/fe/compare/v0.4.0...v0.5.0) (2025-08-04)
+
+### Bug Fixes
+
+- Add CLI framework with cac and improve TS config ([f7bd3e2](https://github.com/hacxy/fe/commit/f7bd3e2080c9ec970b148de61304a66db5ca23e3))
+- Add tsx and execa as dev dependencies ([60c5b19](https://github.com/hacxy/fe/commit/60c5b19a654ff8ff9749e79731d8f805ba620a2b))
+- Update pnpm-lock.yaml with vitest dependencies ([bd12dc1](https://github.com/hacxy/fe/commit/bd12dc1982d27abac75b618c249b87a10a23e534))
+
+### Features
+
+- Enable ESLint stylistic rules and add CLI template ([9d139e4](https://github.com/hacxy/fe/commit/9d139e4b742ae347403f8e8abcc1b29e1b198a4c))
+- Remove tsx from vitest deps and add react-mobile template ([a40e605](https://github.com/hacxy/fe/commit/a40e605b98e7dfd0c3db98f18ee1bf61a4eb1dbb))
+- Update eslint config and add cli-ink template ([d0b594b](https://github.com/hacxy/fe/commit/d0b594bb934f07ebd68159a6e2c1a7db7f5ebfbb))
+
 # [0.4.0](https://github.com/hacxy/fe/compare/v0.3.0...v0.4.0) (2025-07-31)
 
 ### Bug Fixes
