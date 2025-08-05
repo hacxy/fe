@@ -1,3 +1,15 @@
+# [0.6.0](https://github.com/hacxy/fe/compare/v0.5.0...v0.6.0) (2025-08-05)
+
+### Bug Fixes
+
+- Add @eslint-react/eslint-plugin to devDependencies ([f8f3ad4](https://github.com/hacxy/fe/commit/f8f3ad44e80d5d7131829317b7a3e77d879c283f))
+- Add czg script for commitizen support ([b24bfd6](https://github.com/hacxy/fe/commit/b24bfd60c1fa6d5094e22ed1fd39a2097abad446))
+- Update react-mobile template dependencies to React 19 ([90204e3](https://github.com/hacxy/fe/commit/90204e399a31121daea189e24c8762d311c9201a))
+
+### Features
+
+- Add @hacxy/eslint-config and cleanup create-app flow ([a0bd604](https://github.com/hacxy/fe/commit/a0bd604b550c6cce2cf3e111c2dbe17c3fd17179))
+
 # [0.5.0](https://github.com/hacxy/fe/compare/v0.4.0...v0.5.0) (2025-08-04)
 
 ### Bug Fixes
