@@ -1,9 +1,9 @@
-import React, { memo, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
-import { NavBar } from 'react-vant';
+import { NavBar } from 'antd-mobile';
+import React, { useMemo } from 'react';
+import { useLocation } from 'react-router';
 import { routeConfig } from '../../routes/config';
 
-const CommonNavBar: React.FC = memo(() => {
+const CommonNavBar: React.FC = () => {
   const location = useLocation();
 
   const pageName = useMemo(() => {
@@ -13,9 +13,11 @@ const CommonNavBar: React.FC = memo(() => {
 
   return (
     <div style={{ flexShrink: 0 }}>
-      <NavBar title={pageName} leftArrow={false} />
+      <NavBar>
+        {pageName}
+      </NavBar>
     </div>
   );
-});
+};
 
 export default CommonNavBar;

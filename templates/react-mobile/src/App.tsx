@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router';
 import { CommonNavBar, CommonTabbar } from './components';
 import './App.css';
 

@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React from 'react';
 
-const Profile: React.FC = memo(() => {
+const Profile: React.FC = () => {
   return <div>我的</div>;
-});
+};
 
 export default Profile;

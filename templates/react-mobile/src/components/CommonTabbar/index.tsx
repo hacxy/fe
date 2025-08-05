@@ -1,37 +1,35 @@
 import type { IRouteConfig } from '../../routes/config';
-import React, { memo, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Tabbar } from 'react-vant';
+import { TabBar } from 'antd-mobile';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import { routeConfig } from '../../routes/config';
 
-const CommonTabbar: React.FC = memo(() => {
+const CommonTabbar: React.FC = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [current, setCurrent] = useState(
-    routeConfig.findIndex(item => item.path === location.pathname)
-  );
-  const handleClickTabItem = (route: IRouteConfig, index: number) => {
-    setCurrent(index);
-    navigate({ pathname: route.path });
+  const { pathname } = useLocation();
+
+  const handleClickTabItem = (route: IRouteConfig) => {
+    if (route.path) {
+      navigate(route.path, { replace: true });
+    }
   };
 
   return (
     <div style={{ flexShrink: 0 }}>
-      <Tabbar fixed={false} value={current}>
-        {routeConfig.map((item, index) => {
+      <TabBar activeKey={pathname}>
+        {routeConfig.map(item => {
           return (
-            <Tabbar.Item
+            <TabBar.Item
               icon={item.icon}
               key={item.path}
-              onClick={() => handleClickTabItem(item, index)}
-            >
-              {item.name}
-            </Tabbar.Item>
+              title={item.name}
+              onClick={() => handleClickTabItem(item)}
+            />
           );
         })}
-      </Tabbar>
+      </TabBar>
     </div>
   );
-});
+};
 
 export default CommonTabbar;

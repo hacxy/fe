@@ -1,16 +1,15 @@
-import type { Router } from '@remix-run/router';
-import { createBrowserRouter, redirect } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router';
 import App from '../App.tsx';
 import { routeConfig } from './config.tsx';
 
-export const router: Router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
       {
         path: '/',
-        loader: () => redirect('/home')
+        element: <Navigate to="/home" replace />
       },
       ...routeConfig
     ]
