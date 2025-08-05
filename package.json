@@ -18,7 +18,7 @@
   "scripts": {
     "build": "pnpm -r run build",
     "build:cli": "npm run copy-templates && pnpm -F @hacxy/fe build && pnpm -F @hacxy/create-fe build",
-    "lint": "pnpm -r run lint",
+    "lint": "pnpm -r run lint && eslint .",
     "lint:fix": "pnpm -r run lint:fix",
     "lint:staged": "pnpm -r run lint:staged",
     "cz": "czg",
@@ -33,6 +33,7 @@
     "cac": "^6.7.14",
     "chalk": "^5.4.1",
     "czg": "^1.12.0",
+    "eslint": "^9.32.0",
     "inquirer": "^12.9.0",
     "lint-staged": "^16.1.2",
     "ora": "^8.2.0",

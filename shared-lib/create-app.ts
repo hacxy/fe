@@ -4,8 +4,8 @@ import { readdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import { copyTemplate, emptyDir, getTemplates } from './utils.js';
 import pkg from '../packages/fe/package.json';
+import { copyTemplate, emptyDir, getTemplates } from './utils.js';
 
 async function renameTemplateSpecialFiles(dest: string) {
   const gitignorePath = join(dest, '_gitignore');
@@ -76,19 +76,19 @@ async function creator(template: string, projectName: string, templatesDir: stri
     const packageJsonPath = join(dest, 'package.json');
     const packageJson = JSON.parse(await readFile(packageJsonPath, 'utf-8'));
     packageJson.name = visibleProjectName;
-    packageJson.devDependencies['simple-git-hooks'] = "^2.13.0";
-    packageJson.devDependencies['lint-staged'] = "^16.1.2";
+    packageJson.devDependencies['simple-git-hooks'] = '^2.13.0';
+    packageJson.devDependencies['lint-staged'] = '^16.1.2';
     packageJson.devDependencies[pkg.name] = `^${pkg.version}`;
-    packageJson.scripts.prepare = "simple-git-hooks";
+    packageJson.scripts.prepare = 'simple-git-hooks';
     packageJson['simple-git-hooks'] = {
-      "pre-commit": "npx lint-staged",
-      "commit-msg": "fe msg"
-    } 
+      'pre-commit': 'npx lint-staged',
+      'commit-msg': 'fe msg'
+    };
     packageJson['lint-staged'] = {
-      "*": [
-        "npm run lint:staged"
+      '*': [
+        'npm run lint:staged'
       ]
-    }
+    };
     await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
     await renameTemplateSpecialFiles(dest);
@@ -125,11 +125,11 @@ export async function createApp(template?: string) {
 
   if (!template) {
     const { template: selectedTemplate } = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'template',
-      message: '请选择要使用的模板：',
-      choices: templates,
+      {
+        type: 'list',
+        name: 'template',
+        message: '请选择要使用的模板：',
+        choices: templates,
       },
     ]);
     template = selectedTemplate;

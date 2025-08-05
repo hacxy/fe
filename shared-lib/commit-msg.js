@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export const commitMsg = () => {
+export function commitMsg() {
   // 检查有没有.git/COMMIT_EDITMSG文件, 没有则给出提示
   if (!fs.existsSync(path.resolve(process.cwd(), '.git/COMMIT_EDITMSG'))) {
     console.error(
