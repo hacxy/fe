@@ -97,7 +97,7 @@ async function main() {
   try {
     const cwd = process.cwd();
     const originTemplatesDir = join(cwd, 'templates');
-    
+
     // 定义多个目标目录
     const targetDirectories = [
       join(cwd, './packages/create-fe/dist', 'templates'),

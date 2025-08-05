@@ -39,4 +39,3 @@ npm install @hacxy/fe -g
 # 创建项目
 fe new
 ```
-
