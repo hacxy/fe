@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@hacxy/bump": "^0.2.0",
+    "@hacxy/eslint-config": "^0.4.1",
     "@types/node": "^22.16.5",
     "cac": "^6.7.14",
     "chalk": "^5.4.1",

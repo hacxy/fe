@@ -4,7 +4,6 @@ import { readdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import chalk from 'chalk';
 import inquirer from 'inquirer';
-import ora from 'ora';
 import { copyTemplate, emptyDir, getTemplates } from './utils.js';
 import pkg from '../packages/fe/package.json';
 
@@ -68,8 +67,6 @@ async function creator(template: string, projectName: string, templatesDir: stri
     visibleProjectName = process.cwd().split(/[\\/]/).pop() || 'project';
   }
 
-  const spinner = ora(`正在生成项目 ${visibleProjectName} ...`).start();
-
   try {
     const src = join(templatesDir, template);
     const dest = resolve(process.cwd(), projectName);
@@ -95,13 +92,24 @@ async function creator(template: string, projectName: string, templatesDir: stri
     await writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2));
 
     await renameTemplateSpecialFiles(dest);
+    const { shouldRelease } = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'shouldRelease',
+        message: '是否需要github版本发布流程？',
+        default: true,
+      },
+    ]);
+    if (!shouldRelease) {
+      await rm(join(dest, '.github/workflows/release.yml'), { force: true });
+    }
 
-    spinner.succeed(chalk.green(`项目 ${visibleProjectName} 创建成功！`));
+    console.log(chalk.green(`项目 ${visibleProjectName} 创建成功！`));
     console.log(chalk.cyan('\n请进入项目目录并开始开发：'));
     console.log(chalk.yellow(`\n  cd ${projectName}\n`));
   }
   catch (err: any) {
-    spinner.fail(chalk.red(`项目创建失败: ${err.message}`));
+    console.log(chalk.red(`项目创建失败: ${err.message}`));
     process.exit(1);
   }
 }
