@@ -1,3 +1,9 @@
+## [0.6.1](https://github.com/hacxy/fe/compare/v0.6.0...v0.6.1) (2025-08-08)
+
+### Bug Fixes
+
+- Add tsx dependency to vitest in pnpm-lock.yaml" (64 chars) Alternative with more context: "Update pnpm-lock with tsx dependency for vitest" (50 chars) ([bcd2843](https://github.com/hacxy/fe/commit/bcd28433cc66092e27852225f5ccc7fd042a0cf4))
+
 # [0.6.0](https://github.com/hacxy/fe/compare/v0.5.0...v0.6.0) (2025-08-05)
 
 ### Bug Fixes
