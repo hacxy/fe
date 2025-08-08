@@ -165,6 +165,9 @@ importers:
       '@hacxy/tsconfig':
         specifier: ^0.1.0
         version: 0.1.0
+      cac:
+        specifier: ^6.7.14
+        version: 6.7.14
       czg:
         specifier: ^1.12.0
         version: 1.12.0
@@ -243,9 +246,6 @@ importers:
       '@hacxy/tsconfig':
         specifier: ^0.1.0
         version: 0.1.0
-      cac:
-        specifier: ^6.7.14
-        version: 6.7.14
       czg:
         specifier: ^1.12.0
         version: 1.12.0
